@@ -3,20 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daman Casino - Stake Edition</title>
+    <title>DAMAN VIP - Hardcore Casino Edition</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
         body {
-            background-color: #070913;
-            background-image: 
-                radial-gradient(circle at 20% 20%, rgba(0, 231, 1, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(0, 184, 255, 0.12) 0%, transparent 40%);
+            background-color: #010206;
             color: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -26,294 +23,426 @@
             position: relative;
         }
 
-        /* Floating Casino Elements */
-        .casino-element {
+        /* Moving Cyber Grid Background */
+        body::before {
+            content: "";
             position: absolute;
-            font-size: 28px;
-            opacity: 0.15;
-            z-index: -1;
-            animation: floatAround 10s infinite ease-in-out alternate;
+            inset: 0;
+            background-image: linear-gradient(rgba(0, 231, 1, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 184, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -3;
+            animation: gridPulse 15s linear infinite;
         }
-        .el-1 { top: 15%; left: 10%; animation-duration: 8s; }
-        .el-2 { bottom: 20%; left: 15%; animation-duration: 12s; animation-delay: 1s; }
-        .el-3 { top: 20%; right: 12%; animation-duration: 9s; animation-delay: 2s; }
-        .el-4 { bottom: 15%; right: 18%; animation-duration: 11s; animation-delay: 1.5s; }
-
-        @keyframes floatAround {
-            0% { transform: translateY(0px) rotate(0deg) scale(1); }
-            50% { transform: translateY(-25px) rotate(15deg) scale(1.1); }
-            100% { transform: translateY(20px) rotate(-15deg) scale(0.95); }
+        @keyframes gridPulse {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
         }
 
-        /* Background Glow */
-        .bg-glow {
+        /* Sci-Fi Laser Scanline Effect */
+        .scanline {
             position: absolute;
-            width: 450px;
-            height: 450px;
-            background: linear-gradient(135deg, #00e701, #00b8ff);
-            filter: blur(160px);
-            border-radius: 50%;
-            opacity: 0.18;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00e701, #00b8ff, transparent);
+            opacity: 0.7;
+            z-index: 10;
+            animation: scanMove 4s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes scanMove {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+
+        /* Interactive Canvas Background */
+        #bg-canvas {
+            position: absolute;
+            inset: 0;
             z-index: -2;
-            animation: pulseGlow 7s infinite alternate ease-in-out;
-        }
-        @keyframes pulseGlow {
-            0% { transform: scale(0.9) translate(-30px, -30px); }
-            100% { transform: scale(1.15) translate(30px, 30px); }
+            width: 100%;
+            height: 100%;
         }
 
-        /* Loader */
+        /* Floating 3D Casino Elements */
+        .floating-icon {
+            position: absolute;
+            font-size: 32px;
+            opacity: 0.25;
+            z-index: -1;
+            filter: drop-shadow(0 0 15px rgba(0, 231, 1, 0.8));
+            animation: crazyFloat 8s infinite ease-in-out alternate;
+        }
+        .icon-1 { top: 12%; left: 10%; animation-duration: 7s; }
+        .icon-2 { bottom: 15%; left: 12%; animation-duration: 10s; animation-delay: 1s; }
+        .icon-3 { top: 18%; right: 12%; animation-duration: 8s; animation-delay: 2s; }
+        .icon-4 { bottom: 18%; right: 15%; animation-duration: 9s; animation-delay: 1.5s; }
+
+        @keyframes crazyFloat {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            100% { transform: translateY(-40px) rotate(35deg) scale(1.25); filter: drop-shadow(0 0 25px rgba(0, 184, 255, 1)); }
+        }
+
+        /* Ambient Multi-Color Glowing Orbs */
+        .ambient-orb {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            filter: blur(160px);
+            z-index: -1;
+            opacity: 0.35;
+            animation: orbFloat 7s infinite alternate ease-in-out;
+        }
+        .orb-1 { background: #00e701; top: -150px; left: -150px; }
+        .orb-2 { background: #00b8ff; bottom: -150px; right: -150px; animation-duration: 10s; }
+        .orb-3 { background: #ff007f; top: 50%; left: 50%; transform: translate(-50%, -50%); animation-duration: 8s; }
+
+        @keyframes orbFloat {
+            0% { transform: scale(0.8) translate(0, 0); }
+            100% { transform: scale(1.25) translate(50px, -40px); }
+        }
+
+        /* Hardcore Cinematic Loader */
         #loader {
             position: fixed;
             inset: 0;
-            background: #070913;
+            background: #010206;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 999;
+            z-index: 9999;
             transition: opacity 0.6s ease, visibility 0.6s ease;
         }
-        .spinner {
-            width: 55px;
-            height: 55px;
-            border: 4px solid rgba(255, 255, 255, 0.08);
+        .loader-spinner {
+            width: 85px;
+            height: 85px;
+            border: 4px solid rgba(255, 255, 255, 0.05);
             border-top: 4px solid #00e701;
+            border-right: 4px solid #00b8ff;
+            border-bottom: 4px solid #ff007f;
             border-radius: 50%;
-            animation: spin 0.8s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
-            box-shadow: 0 0 20px rgba(0, 231, 1, 0.4);
-            margin-bottom: 15px;
+            animation: spinLoader 0.5s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+            box-shadow: 0 0 40px rgba(0, 231, 1, 0.6);
+            margin-bottom: 22px;
         }
-        @keyframes spin {
+        @keyframes spinLoader {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        /* Glassmorphism Card Box */
-        .wrapper {
-            background: rgba(13, 17, 28, 0.85);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 40px 32px;
-            width: 100%;
-            max-width: 420px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 231, 1, 0.05);
-            transform: translateY(20px);
-            opacity: 0;
-            animation: entranceCard 0.8s 0.3s forwards cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        @keyframes entranceCard {
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        .header h1 {
-            font-size: 32px;
+        .loader-text {
+            font-size: 16px;
             font-weight: 900;
-            letter-spacing: 1.5px;
+            letter-spacing: 5px;
+            background: linear-gradient(45deg, #00e701, #00b8ff, #ff007f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulseText 1s infinite alternate;
+        }
+        @keyframes pulseText {
+            from { opacity: 0.4; filter: drop-shadow(0 0 5px rgba(0,231,1,0.4)); }
+            to { opacity: 1; filter: drop-shadow(0 0 20px rgba(0,231,1,0.9)); }
+        }
+
+        /* Ultra-HD Holographic Card Wrapper */
+        .card-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 440px;
+            padding: 4px;
+            border-radius: 32px;
+            background: linear-gradient(135deg, #00e701, #00b8ff, #ff007f, #00e701);
+            background-size: 300% 300%;
+            animation: borderRotate 5s linear infinite, cardEntrance 0.9s 0.4s forwards cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 35px 90px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 231, 1, 0.2);
+            transform: translateY(30px) scale(0.95);
+            opacity: 0;
+        }
+
+        @keyframes cardEntrance {
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        @keyframes borderRotate {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card-inner {
+            background: rgba(4, 7, 16, 0.92);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            border-radius: 29px;
+            padding: 45px 35px;
+            text-align: center;
+        }
+
+        /* Branding */
+        .brand-logo {
+            font-size: 40px;
+            font-weight: 900;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
+            margin-bottom: 6px;
+            background: linear-gradient(45deg, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .header h1 span {
+        .brand-logo span {
             color: #00e701;
-            text-shadow: 0 0 15px rgba(0, 231, 1, 0.5);
+            -webkit-text-fill-color: #00e701;
+            text-shadow: 0 0 30px rgba(0, 231, 1, 0.8);
         }
-        .header p {
+        .brand-subtitle {
             color: #94a3b8;
             font-size: 13px;
-            margin-top: 6px;
-        }
-
-        /* Tabs */
-        .tabs {
-            display: flex;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 12px;
-            padding: 5px;
+            letter-spacing: 1.5px;
             margin-bottom: 22px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-transform: uppercase;
         }
-        .tab-btn {
-            flex: 1;
-            background: none;
-            border: none;
-            color: #94a3b8;
+
+        /* Invitation Code Badge */
+        .invite-badge {
+            background: rgba(0, 231, 1, 0.12);
+            border: 1px solid rgba(0, 231, 1, 0.4);
+            color: #00e701;
             padding: 11px;
-            font-weight: 700;
+            border-radius: 12px;
             font-size: 14px;
-            cursor: pointer;
-            border-radius: 9px;
-            transition: all 0.3s ease;
-        }
-        .tab-btn.active {
-            background: #00e701;
-            color: #070913;
-            box-shadow: 0 4px 20px rgba(0, 231, 1, 0.4);
-        }
-
-        .form-box {
-            display: none;
-        }
-        .form-box.active {
-            display: block;
-            animation: fadeIn 0.4s ease;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .input-group {
-            margin-bottom: 18px;
-        }
-        .input-group label {
-            display: block;
-            font-size: 11px;
-            font-weight: 700;
-            color: #cbd5e1;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 7px;
-        }
-        .input-group input {
-            width: 100%;
-            padding: 14px 16px;
-            background: rgba(7, 9, 19, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            color: #fff;
-            font-size: 15px;
-            outline: none;
-            transition: 0.3s;
-        }
-        .input-group input:focus {
-            border-color: #00e701;
-            box-shadow: 0 0 15px rgba(0, 231, 1, 0.3);
-            background: rgba(7, 9, 19, 1);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #00e701, #00b8ff);
-            border: none;
-            border-radius: 10px;
-            color: #070913;
-            font-size: 15px;
             font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 8px;
-            box-shadow: 0 6px 20px rgba(0, 231, 1, 0.35);
+            margin-bottom: 25px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 0 20px rgba(0, 231, 1, 0.25);
+            animation: badgePulse 2s infinite alternate;
         }
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 231, 1, 0.5);
+        @keyframes badgePulse {
+            0% { box-shadow: 0 0 10px rgba(0,231,1,0.2); }
+            100% { box-shadow: 0 0 25px rgba(0,231,1,0.5); }
         }
 
-        .footer {
-            text-align: center;
-            margin-top: 22px;
+        /* Action Buttons Container */
+        .action-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .portal-btn {
+            position: relative;
+            width: 100%;
+            padding: 17px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        /* Login Primary Neon Button */
+        .btn-signin {
+            background: linear-gradient(135deg, #00e701, #00b8ff);
+            color: #010206;
+            box-shadow: 0 10px 35px rgba(0, 231, 1, 0.5);
+            border: none;
+        }
+        .btn-signin:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 18px 45px rgba(0, 231, 1, 0.8);
+            filter: brightness(1.2);
+        }
+
+        /* Register Secondary Neon Button */
+        .btn-signup {
+            background: linear-gradient(135deg, #ff007f, #7000ff);
+            color: #ffffff;
+            box-shadow: 0 10px 35px rgba(255, 0, 127, 0.4);
+            border: none;
+        }
+        .btn-signup:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 18px 45px rgba(255, 0, 127, 0.7);
+            filter: brightness(1.2);
+        }
+
+        /* Button Shine Effect */
+        .portal-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(60deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg) translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+        .portal-btn:hover::after {
+            transform: rotate(45deg) translateX(100%);
+        }
+
+        /* Footer Meta */
+        .footer-meta {
+            margin-top: 30px;
             font-size: 12px;
             color: #64748b;
+            letter-spacing: 1px;
         }
-        .footer span {
+        .footer-meta span {
             color: #00e701;
-            font-weight: 600;
+            font-weight: 700;
         }
     </style>
 </head>
 <body>
 
-    <div class="casino-element el-1">🎲</div>
-    <div class="casino-element el-2">🎰</div>
-    <div class="casino-element el-3">💎</div>
-    <div class="casino-element el-4">🪙</div>
+    <!-- Sci-Fi Scanline -->
+    <div class="scanline"></div>
 
-    <div class="bg-glow"></div>
+    <!-- Floating 3D Casino Icons -->
+    <div class="floating-icon icon-1">🎲</div>
+    <div class="floating-icon icon-2">🎰</div>
+    <div class="floating-icon icon-3">💎</div>
+    <div class="floating-icon icon-4">🪙</div>
 
+    <!-- Interactive Canvas Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Ambient Glowing Orbs -->
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
+
+    <!-- Cinematic Loader -->
     <div id="loader">
-        <div class="spinner"></div>
-        <div style="font-weight: 800; letter-spacing: 3px; color: #00e701; font-size: 14px;">LOADING CASINO...</div>
+        <div class="loader-spinner"></div>
+        <div class="loader-text">LOADING HARDCORE PORTAL...</div>
     </div>
 
-    <div class="wrapper">
-        <div class="header">
-            <h1>Daman <span>VIP</span></h1>
-            <p>High-Stakes Gaming Portal</p>
-        </div>
+    <!-- Main Holographic Card -->
+    <div class="card-wrapper">
+        <div class="card-inner">
+            <div class="brand-logo">DAMAN <span>VIP</span></div>
+            <div class="brand-subtitle">High-Stakes Official Gaming Hub</div>
 
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('login')">Sign In</button>
-            <button class="tab-btn" onclick="switchTab('register')">Register</button>
-        </div>
+            <div class="invite-badge">
+                CODE: 412518325625
+            </div>
 
-        <!-- Login Form -->
-        <div id="login" class="form-box active">
-            <form onsubmit="handleForm(event, 'Login Successful!')">
-                <div class="input-group">
-                    <label>Mobile Number / Username</label>
-                    <input type="text" placeholder="Enter mobile number" required>
-                </div>
-                <div class="input-group">
-                    <label>Password</label>
-                    <input type="password" placeholder="Enter password" required>
-                </div>
-                <button type="submit" class="submit-btn">Play Now</button>
-            </form>
-        </div>
+            <div class="action-container">
+                <!-- Sign In Link -->
+                <a href="https://www.DamanClub.win/#/register?invitationCode=412518325625" class="portal-btn btn-signin" target="_blank">Sign In / Login</a>
+                
+                <!-- Register Link -->
+                <a href="https://www.DamanClub.win/#/register?invitationCode=412518325625" class="portal-btn btn-signup" target="_blank">Register Now</a>
+            </div>
 
-        <!-- Register Form -->
-        <div id="register" class="form-box">
-            <form onsubmit="handleForm(event, 'Account Created!')">
-                <div class="input-group">
-                    <label>Mobile Number</label>
-                    <input type="tel" placeholder="Enter mobile number" required>
-                </div>
-                <div class="input-group">
-                    <label>Create Password</label>
-                    <input type="password" placeholder="Create secure password" required>
-                </div>
-                <div class="input-group">
-                    <label>Invite Code</label>
-                    <input type="text" value="STAKE999VIP" readonly>
-                </div>
-                <button type="submit" class="submit-btn">Create Account</button>
-            </form>
-        </div>
-
-        <div class="footer">
-            Provably Fair &bull; <span>Secure Session 🔒</span>
+            <div class="footer-meta">
+                Encrypted 256-bit Session &bull; <span>Provably Fair 🔒</span>
+            </div>
         </div>
     </div>
 
     <script>
+        // Cinematic Loader Fade Out
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const loader = document.getElementById('loader');
                 loader.style.opacity = '0';
                 loader.style.visibility = 'hidden';
-            }, 600);
+            }, 700);
         });
 
-        function switchTab(tabName) {
-            document.querySelectorAll('.form-box').forEach(box => box.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        // Advanced Interactive Canvas Particle Network + Cursor Trail Animation
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
 
-            document.getElementById(tabName).classList.add('active');
-            event.target.classList.add('active');
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        let particlesArray = [];
+        const numberOfParticles = 70;
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x || Math.random() * canvas.width;
+                this.y = y || Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = (Math.random() - 0.5) * 1.2;
+                this.speedY = (Math.random() - 0.5) * 1.2;
+                const colors = ['#00e701', '#00b8ff', '#ff007f'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX = -this.speedX;
+                if (this.y < 0 || this.y > canvas.height) this.speedY = -this.speedY;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
         }
 
-        function handleForm(e, msg) {
-            e.preventDefault();
-            alert(msg);
+        function initParticles() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
         }
+        initParticles();
+
+        // Add interactive particles on touch/click/mousemove
+        window.addEventListener('mousemove', (e) => {
+            for (let i = 0; i < 2; i++) {
+                particlesArray.push(new Particle(e.clientX, e.clientY));
+                if (particlesArray.length > 110) {
+                    particlesArray.shift();
+                }
+            }
+        });
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+
+                // Connect particles with glowing lines
+                for (let j = i; j < particlesArray.length; j++) {
+                    const dx = particlesArray[i].x - particlesArray[j].x;
+                    const dy = particlesArray[i].y - particlesArray[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 120) {
+                        ctx.strokeStyle = `rgba(0, 231, 1, ${0.2 - distance/600})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+                        ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
     </script>
 </body>
 </html>
