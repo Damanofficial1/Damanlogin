@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DAMAN VIP - Hardcore Casino Edition</title>
+    <title>DAMAN VIP - Ultra Hyper-Animated Edition</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #010206;
+            background-color: #000205;
             color: #ffffff;
             min-height: 100vh;
             display: flex;
@@ -27,34 +27,35 @@
         body::before {
             content: "";
             position: absolute;
-            inset: 0;
-            background-image: linear-gradient(rgba(0, 231, 1, 0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(0, 184, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
+            inset: -50%;
+            background-image: linear-gradient(rgba(0, 231, 1, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 184, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
             z-index: -3;
-            animation: gridPulse 15s linear infinite;
+            animation: gridDrift 20s linear infinite;
         }
-        @keyframes gridPulse {
-            0% { background-position: 0 0; }
-            100% { background-position: 50px 50px; }
+        @keyframes gridDrift {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(40px); }
         }
 
-        /* Sci-Fi Laser Scanline Effect */
+        /* Sci-Fi Laser Scanline */
         .scanline {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #00e701, #00b8ff, transparent);
-            opacity: 0.7;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #00e701, #00b8ff, #ff007f, transparent);
+            opacity: 0.8;
             z-index: 10;
-            animation: scanMove 4s linear infinite;
+            animation: scanMove 3s linear infinite;
             pointer-events: none;
+            box-shadow: 0 0 15px rgba(0, 231, 1, 0.8);
         }
         @keyframes scanMove {
-            0% { top: 0%; }
-            100% { top: 100%; }
+            0% { top: -5%; }
+            100% { top: 105%; }
         }
 
         /* Interactive Canvas Background */
@@ -66,99 +67,99 @@
             height: 100%;
         }
 
-        /* Floating 3D Casino Elements */
+        /* 3D Floating Casino Elements */
         .floating-icon {
             position: absolute;
-            font-size: 32px;
-            opacity: 0.25;
+            font-size: 38px;
+            opacity: 0.35;
             z-index: -1;
-            filter: drop-shadow(0 0 15px rgba(0, 231, 1, 0.8));
-            animation: crazyFloat 8s infinite ease-in-out alternate;
+            filter: drop-shadow(0 0 20px rgba(0, 231, 1, 0.9));
+            animation: hyperFloat 6s infinite ease-in-out alternate;
         }
-        .icon-1 { top: 12%; left: 10%; animation-duration: 7s; }
-        .icon-2 { bottom: 15%; left: 12%; animation-duration: 10s; animation-delay: 1s; }
-        .icon-3 { top: 18%; right: 12%; animation-duration: 8s; animation-delay: 2s; }
-        .icon-4 { bottom: 18%; right: 15%; animation-duration: 9s; animation-delay: 1.5s; }
+        .icon-1 { top: 10%; left: 8%; animation-duration: 5s; }
+        .icon-2 { bottom: 12%; left: 10%; animation-duration: 7s; animation-delay: 0.5s; }
+        .icon-3 { top: 15%; right: 10%; animation-duration: 6s; animation-delay: 1s; }
+        .icon-4 { bottom: 15%; right: 12%; animation-duration: 8s; animation-delay: 1.2s; }
 
-        @keyframes crazyFloat {
+        @keyframes hyperFloat {
             0% { transform: translateY(0px) rotate(0deg) scale(1); }
-            100% { transform: translateY(-40px) rotate(35deg) scale(1.25); filter: drop-shadow(0 0 25px rgba(0, 184, 255, 1)); }
+            100% { transform: translateY(-45px) rotate(45deg) scale(1.3); filter: drop-shadow(0 0 35px rgba(255, 0, 127, 1)); }
         }
 
-        /* Ambient Multi-Color Glowing Orbs */
+        /* Massive Fluid Ambient Orbs */
         .ambient-orb {
             position: absolute;
-            width: 500px;
-            height: 500px;
+            width: 600px;
+            height: 600px;
             border-radius: 50%;
-            filter: blur(160px);
+            filter: blur(140px);
             z-index: -1;
-            opacity: 0.35;
-            animation: orbFloat 7s infinite alternate ease-in-out;
+            opacity: 0.4;
+            animation: orbMorph 8s infinite alternate ease-in-out;
         }
-        .orb-1 { background: #00e701; top: -150px; left: -150px; }
-        .orb-2 { background: #00b8ff; bottom: -150px; right: -150px; animation-duration: 10s; }
-        .orb-3 { background: #ff007f; top: 50%; left: 50%; transform: translate(-50%, -50%); animation-duration: 8s; }
+        .orb-1 { background: #00e701; top: -200px; left: -200px; }
+        .orb-2 { background: #00b8ff; bottom: -200px; right: -200px; animation-duration: 10s; }
+        .orb-3 { background: #ff007f; top: 50%; left: 50%; transform: translate(-50%, -50%); animation-duration: 7s; }
 
-        @keyframes orbFloat {
-            0% { transform: scale(0.8) translate(0, 0); }
-            100% { transform: scale(1.25) translate(50px, -40px); }
+        @keyframes orbMorph {
+            0% { transform: scale(0.7) translate(0, 0) rotate(0deg); }
+            100% { transform: scale(1.3) translate(60px, -50px) rotate(180deg); }
         }
 
-        /* Hardcore Cinematic Loader */
+        /* Ultra-Smooth Cinematic Loader */
         #loader {
             position: fixed;
             inset: 0;
-            background: #010206;
+            background: #000205;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
         }
         .loader-spinner {
-            width: 85px;
-            height: 85px;
+            width: 90px;
+            height: 90px;
             border: 4px solid rgba(255, 255, 255, 0.05);
             border-top: 4px solid #00e701;
             border-right: 4px solid #00b8ff;
             border-bottom: 4px solid #ff007f;
             border-radius: 50%;
-            animation: spinLoader 0.5s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
-            box-shadow: 0 0 40px rgba(0, 231, 1, 0.6);
-            margin-bottom: 22px;
+            animation: spinLoader 0.45s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            box-shadow: 0 0 50px rgba(0, 231, 1, 0.7);
+            margin-bottom: 25px;
         }
         @keyframes spinLoader {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
         .loader-text {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 900;
-            letter-spacing: 5px;
+            letter-spacing: 6px;
             background: linear-gradient(45deg, #00e701, #00b8ff, #ff007f);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: pulseText 1s infinite alternate;
+            animation: textNeonPulse 0.8s infinite alternate;
         }
-        @keyframes pulseText {
-            from { opacity: 0.4; filter: drop-shadow(0 0 5px rgba(0,231,1,0.4)); }
-            to { opacity: 1; filter: drop-shadow(0 0 20px rgba(0,231,1,0.9)); }
+        @keyframes textNeonPulse {
+            from { opacity: 0.5; filter: drop-shadow(0 0 5px rgba(0,231,1,0.5)); }
+            to { opacity: 1; filter: drop-shadow(0 0 25px rgba(0,231,1,1)); }
         }
 
-        /* Ultra-HD Holographic Card Wrapper */
+        /* Holographic Card Wrapper with Extreme Rotating Border */
         .card-wrapper {
             position: relative;
             width: 100%;
             max-width: 440px;
             padding: 4px;
-            border-radius: 32px;
-            background: linear-gradient(135deg, #00e701, #00b8ff, #ff007f, #00e701);
-            background-size: 300% 300%;
-            animation: borderRotate 5s linear infinite, cardEntrance 0.9s 0.4s forwards cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 35px 90px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 231, 1, 0.2);
-            transform: translateY(30px) scale(0.95);
+            border-radius: 34px;
+            background: linear-gradient(135deg, #00e701, #00b8ff, #ff007f, #7000ff, #00e701);
+            background-size: 400% 400%;
+            animation: borderFlow 4s linear infinite, cardEntrance 0.8s 0.3s forwards cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.95), 0 0 50px rgba(0, 231, 1, 0.3);
+            transform: translateY(30px) scale(0.92);
             opacity: 0;
         }
 
@@ -166,26 +167,26 @@
             to { transform: translateY(0) scale(1); opacity: 1; }
         }
 
-        @keyframes borderRotate {
+        @keyframes borderFlow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
         .card-inner {
-            background: rgba(4, 7, 16, 0.92);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            border-radius: 29px;
+            background: rgba(3, 6, 14, 0.94);
+            backdrop-filter: blur(45px);
+            -webkit-backdrop-filter: blur(45px);
+            border-radius: 31px;
             padding: 45px 35px;
             text-align: center;
         }
 
         /* Branding */
         .brand-logo {
-            font-size: 40px;
+            font-size: 42px;
             font-weight: 900;
-            letter-spacing: 2.5px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             margin-bottom: 6px;
             background: linear-gradient(45deg, #ffffff, #94a3b8);
@@ -195,33 +196,33 @@
         .brand-logo span {
             color: #00e701;
             -webkit-text-fill-color: #00e701;
-            text-shadow: 0 0 30px rgba(0, 231, 1, 0.8);
+            text-shadow: 0 0 35px rgba(0, 231, 1, 0.9);
         }
         .brand-subtitle {
             color: #94a3b8;
             font-size: 13px;
-            letter-spacing: 1.5px;
-            margin-bottom: 22px;
+            letter-spacing: 1.8px;
+            margin-bottom: 24px;
             text-transform: uppercase;
         }
 
         /* Invitation Code Badge */
         .invite-badge {
-            background: rgba(0, 231, 1, 0.12);
-            border: 1px solid rgba(0, 231, 1, 0.4);
+            background: rgba(0, 231, 1, 0.15);
+            border: 1px solid rgba(0, 231, 1, 0.5);
             color: #00e701;
-            padding: 11px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 800;
+            padding: 12px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 900;
             margin-bottom: 25px;
-            letter-spacing: 1.5px;
-            box-shadow: 0 0 20px rgba(0, 231, 1, 0.25);
-            animation: badgePulse 2s infinite alternate;
+            letter-spacing: 2px;
+            box-shadow: 0 0 25px rgba(0, 231, 1, 0.35);
+            animation: badgeGlow 1.5s infinite alternate;
         }
-        @keyframes badgePulse {
-            0% { box-shadow: 0 0 10px rgba(0,231,1,0.2); }
-            100% { box-shadow: 0 0 25px rgba(0,231,1,0.5); }
+        @keyframes badgeGlow {
+            0% { box-shadow: 0 0 10px rgba(0,231,1,0.2); transform: scale(1); }
+            100% { box-shadow: 0 0 30px rgba(0,231,1,0.6); transform: scale(1.02); }
         }
 
         /* Action Buttons Container */
@@ -234,12 +235,12 @@
         .portal-btn {
             position: relative;
             width: 100%;
-            padding: 17px;
+            padding: 18px;
             border-radius: 14px;
             font-size: 16px;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 1.8px;
+            letter-spacing: 2px;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
@@ -250,30 +251,30 @@
         /* Login Primary Neon Button */
         .btn-signin {
             background: linear-gradient(135deg, #00e701, #00b8ff);
-            color: #010206;
-            box-shadow: 0 10px 35px rgba(0, 231, 1, 0.5);
+            color: #000205;
+            box-shadow: 0 12px 40px rgba(0, 231, 1, 0.6);
             border: none;
         }
         .btn-signin:hover {
-            transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 18px 45px rgba(0, 231, 1, 0.8);
-            filter: brightness(1.2);
+            transform: translateY(-5px) scale(1.04);
+            box-shadow: 0 20px 55px rgba(0, 231, 1, 0.9);
+            filter: brightness(1.25);
         }
 
         /* Register Secondary Neon Button */
         .btn-signup {
             background: linear-gradient(135deg, #ff007f, #7000ff);
             color: #ffffff;
-            box-shadow: 0 10px 35px rgba(255, 0, 127, 0.4);
+            box-shadow: 0 12px 40px rgba(255, 0, 127, 0.5);
             border: none;
         }
         .btn-signup:hover {
-            transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 18px 45px rgba(255, 0, 127, 0.7);
-            filter: brightness(1.2);
+            transform: translateY(-5px) scale(1.04);
+            box-shadow: 0 20px 55px rgba(255, 0, 127, 0.8);
+            filter: brightness(1.25);
         }
 
-        /* Button Shine Effect */
+        /* High-Speed Button Shine Effect */
         .portal-btn::after {
             content: '';
             position: absolute;
@@ -281,9 +282,9 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(60deg, transparent, rgba(255,255,255,0.3), transparent);
+            background: linear-gradient(60deg, transparent, rgba(255,255,255,0.4), transparent);
             transform: rotate(45deg) translateX(-100%);
-            transition: transform 0.6s ease;
+            transition: transform 0.5s ease;
         }
         .portal-btn:hover::after {
             transform: rotate(45deg) translateX(100%);
@@ -294,7 +295,7 @@
             margin-top: 30px;
             font-size: 12px;
             color: #64748b;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
         }
         .footer-meta span {
             color: #00e701;
@@ -307,7 +308,7 @@
     <!-- Sci-Fi Scanline -->
     <div class="scanline"></div>
 
-    <!-- Floating 3D Casino Icons -->
+    <!-- 3D Floating Icons -->
     <div class="floating-icon icon-1">🎲</div>
     <div class="floating-icon icon-2">🎰</div>
     <div class="floating-icon icon-3">💎</div>
@@ -324,7 +325,7 @@
     <!-- Cinematic Loader -->
     <div id="loader">
         <div class="loader-spinner"></div>
-        <div class="loader-text">LOADING HARDCORE PORTAL...</div>
+        <div class="loader-text">LOADING HYPER PORTAL...</div>
     </div>
 
     <!-- Main Holographic Card -->
@@ -338,11 +339,11 @@
             </div>
 
             <div class="action-container">
-                <!-- Sign In Link -->
-                <a href="https://www.DamanClub.win/#/register?invitationCode=412518325625" class="portal-btn btn-signin" target="_blank">Sign In / Login</a>
+                <!-- Updated Sign In Link -->
+                <a href="https://www.damanclub.kim/#/register?invitationCode=412518325625" class="portal-btn btn-signin" target="_blank">Sign In / Login</a>
                 
-                <!-- Register Link -->
-                <a href="https://www.DamanClub.win/#/register?invitationCode=412518325625" class="portal-btn btn-signup" target="_blank">Register Now</a>
+                <!-- Updated Register Link -->
+                <a href="https://www.damanclub.kim/#/register?invitationCode=412518325625" class="portal-btn btn-signup" target="_blank">Register Now</a>
             </div>
 
             <div class="footer-meta">
@@ -358,10 +359,10 @@
                 const loader = document.getElementById('loader');
                 loader.style.opacity = '0';
                 loader.style.visibility = 'hidden';
-            }, 700);
+            }, 600);
         });
 
-        // Advanced Interactive Canvas Particle Network + Cursor Trail Animation
+        // Ultra-Smooth High-Performance Particle Network + Magnetism Animation
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
 
@@ -373,16 +374,16 @@
         window.addEventListener('resize', resizeCanvas);
 
         let particlesArray = [];
-        const numberOfParticles = 70;
+        const numberOfParticles = 85;
 
         class Particle {
             constructor(x, y) {
                 this.x = x || Math.random() * canvas.width;
                 this.y = y || Math.random() * canvas.height;
-                this.size = Math.random() * 3 + 1;
-                this.speedX = (Math.random() - 0.5) * 1.2;
-                this.speedY = (Math.random() - 0.5) * 1.2;
-                const colors = ['#00e701', '#00b8ff', '#ff007f'];
+                this.size = Math.random() * 3.5 + 1;
+                this.speedX = (Math.random() - 0.5) * 1.5;
+                this.speedY = (Math.random() - 0.5) * 1.5;
+                const colors = ['#00e701', '#00b8ff', '#ff007f', '#7000ff'];
                 this.color = colors[Math.floor(Math.random() * colors.length)];
             }
             update() {
@@ -393,7 +394,7 @@
             }
             draw() {
                 ctx.fillStyle = this.color;
-                ctx.shadowBlur = 15;
+                ctx.shadowBlur = 18;
                 ctx.shadowColor = this.color;
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -409,13 +410,24 @@
         }
         initParticles();
 
-        // Add interactive particles on touch/click/mousemove
+        // Mouse / Touch Tracking for Dynamic Particle Trail
+        let mouse = { x: null, y: null, active: false };
         window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+            mouse.active = true;
             for (let i = 0; i < 2; i++) {
-                particlesArray.push(new Particle(e.clientX, e.clientY));
-                if (particlesArray.length > 110) {
-                    particlesArray.shift();
-                }
+                particlesArray.push(new Particle(mouse.x, mouse.y));
+                if (particlesArray.length > 130) particlesArray.shift();
+            }
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            if(e.touches.length > 0) {
+                mouse.x = e.touches[0].clientX;
+                mouse.y = e.touches[0].clientY;
+                particlesArray.push(new Particle(mouse.x, mouse.y));
+                if (particlesArray.length > 130) particlesArray.shift();
             }
         });
 
@@ -425,14 +437,14 @@
                 particlesArray[i].update();
                 particlesArray[i].draw();
 
-                // Connect particles with glowing lines
+                // Connect nearby particles with glowing spiderweb lines
                 for (let j = i; j < particlesArray.length; j++) {
                     const dx = particlesArray[i].x - particlesArray[j].x;
                     const dy = particlesArray[i].y - particlesArray[j].y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < 120) {
-                        ctx.strokeStyle = `rgba(0, 231, 1, ${0.2 - distance/600})`;
-                        ctx.lineWidth = 0.8;
+                    if (distance < 130) {
+                        ctx.strokeStyle = `rgba(0, 231, 1, ${0.25 - distance/550})`;
+                        ctx.lineWidth = 0.9;
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
                         ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
