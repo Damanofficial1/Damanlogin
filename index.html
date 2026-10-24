@@ -1,10 +1,319 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Test Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daman Casino - Stake Edition</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #070913;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(0, 231, 1, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(0, 184, 255, 0.12) 0%, transparent 40%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating Casino Elements */
+        .casino-element {
+            position: absolute;
+            font-size: 28px;
+            opacity: 0.15;
+            z-index: -1;
+            animation: floatAround 10s infinite ease-in-out alternate;
+        }
+        .el-1 { top: 15%; left: 10%; animation-duration: 8s; }
+        .el-2 { bottom: 20%; left: 15%; animation-duration: 12s; animation-delay: 1s; }
+        .el-3 { top: 20%; right: 12%; animation-duration: 9s; animation-delay: 2s; }
+        .el-4 { bottom: 15%; right: 18%; animation-duration: 11s; animation-delay: 1.5s; }
+
+        @keyframes floatAround {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(-25px) rotate(15deg) scale(1.1); }
+            100% { transform: translateY(20px) rotate(-15deg) scale(0.95); }
+        }
+
+        /* Background Glow */
+        .bg-glow {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            background: linear-gradient(135deg, #00e701, #00b8ff);
+            filter: blur(160px);
+            border-radius: 50%;
+            opacity: 0.18;
+            z-index: -2;
+            animation: pulseGlow 7s infinite alternate ease-in-out;
+        }
+        @keyframes pulseGlow {
+            0% { transform: scale(0.9) translate(-30px, -30px); }
+            100% { transform: scale(1.15) translate(30px, 30px); }
+        }
+
+        /* Loader */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: #070913;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .spinner {
+            width: 55px;
+            height: 55px;
+            border: 4px solid rgba(255, 255, 255, 0.08);
+            border-top: 4px solid #00e701;
+            border-radius: 50%;
+            animation: spin 0.8s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+            box-shadow: 0 0 20px rgba(0, 231, 1, 0.4);
+            margin-bottom: 15px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Glassmorphism Card Box */
+        .wrapper {
+            background: rgba(13, 17, 28, 0.85);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px 32px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 231, 1, 0.05);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: entranceCard 0.8s 0.3s forwards cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes entranceCard {
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .header h1 {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        .header h1 span {
+            color: #00e701;
+            text-shadow: 0 0 15px rgba(0, 231, 1, 0.5);
+        }
+        .header p {
+            color: #94a3b8;
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 5px;
+            margin-bottom: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #94a3b8;
+            padding: 11px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 9px;
+            transition: all 0.3s ease;
+        }
+        .tab-btn.active {
+            background: #00e701;
+            color: #070913;
+            box-shadow: 0 4px 20px rgba(0, 231, 1, 0.4);
+        }
+
+        .form-box {
+            display: none;
+        }
+        .form-box.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+        .input-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: #cbd5e1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 7px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(7, 9, 19, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+        .input-group input:focus {
+            border-color: #00e701;
+            box-shadow: 0 0 15px rgba(0, 231, 1, 0.3);
+            background: rgba(7, 9, 19, 1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #00e701, #00b8ff);
+            border: none;
+            border-radius: 10px;
+            color: #070913;
+            font-size: 15px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 8px;
+            box-shadow: 0 6px 20px rgba(0, 231, 1, 0.35);
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 231, 1, 0.5);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 22px;
+            font-size: 12px;
+            color: #64748b;
+        }
+        .footer span {
+            color: #00e701;
+            font-weight: 600;
+        }
+    </style>
 </head>
-<body style="background: black; color: white; text-align: center; padding-top: 100px;">
-    <h1>YEH MERA NAYA CODE HAI</h1>
+<body>
+
+    <div class="casino-element el-1">🎲</div>
+    <div class="casino-element el-2">🎰</div>
+    <div class="casino-element el-3">💎</div>
+    <div class="casino-element el-4">🪙</div>
+
+    <div class="bg-glow"></div>
+
+    <div id="loader">
+        <div class="spinner"></div>
+        <div style="font-weight: 800; letter-spacing: 3px; color: #00e701; font-size: 14px;">LOADING CASINO...</div>
+    </div>
+
+    <div class="wrapper">
+        <div class="header">
+            <h1>Daman <span>VIP</span></h1>
+            <p>High-Stakes Gaming Portal</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('login')">Sign In</button>
+            <button class="tab-btn" onclick="switchTab('register')">Register</button>
+        </div>
+
+        <!-- Login Form -->
+        <div id="login" class="form-box active">
+            <form onsubmit="handleForm(event, 'Login Successful!')">
+                <div class="input-group">
+                    <label>Mobile Number / Username</label>
+                    <input type="text" placeholder="Enter mobile number" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="submit-btn">Play Now</button>
+            </form>
+        </div>
+
+        <!-- Register Form -->
+        <div id="register" class="form-box">
+            <form onsubmit="handleForm(event, 'Account Created!')">
+                <div class="input-group">
+                    <label>Mobile Number</label>
+                    <input type="tel" placeholder="Enter mobile number" required>
+                </div>
+                <div class="input-group">
+                    <label>Create Password</label>
+                    <input type="password" placeholder="Create secure password" required>
+                </div>
+                <div class="input-group">
+                    <label>Invite Code</label>
+                    <input type="text" value="STAKE999VIP" readonly>
+                </div>
+                <button type="submit" class="submit-btn">Create Account</button>
+            </form>
+        </div>
+
+        <div class="footer">
+            Provably Fair &bull; <span>Secure Session 🔒</span>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+            }, 600);
+        });
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.form-box').forEach(box => box.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function handleForm(e, msg) {
+            e.preventDefault();
+            alert(msg);
+        }
+    </script>
 </body>
 </html>
-
